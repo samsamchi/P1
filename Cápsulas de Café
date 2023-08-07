@@ -1,0 +1,68 @@
+Descrição:
+Alguns professores do DCX adoram tomar café e decidiram adquirir uma cafeteira especial para a sala do Departamento. A cafeteira utiliza cápsulas de café de vários sabores para preparar a bebida, e cada cápsula prepara o equivalente a duas xícaras.
+
+As cápsulas são vendidas em caixas pequenas (10 unidades) ou grandes (16 unidades), e ficou acertado que cada professor faria a doação de quantas caixas quisesse para o grupo.
+
+Escreva um programa que receba como entrada a quantidade e o tamanho das caixas doadas por cada um dos sete professores que compartilham a cafeteira, e exiba a quantidade total de cápsulas de café doadas, e quantas xícaras cada professor poderá beber.
+
+Formato de entrada:
+
+Um inteiro e um String (P ou p para caixas pequenas, G ou g para caixas grandes) para cada professor
+
+Dica: os professores farão a doação de caixas, não de cápsulas avulsas
+
+Formato de saída:
+
+Dois valores inteiros
+
+Aqui está o código para a solução da questão:
+
+#include <stdio.h>
+
+int calcular(int c, char t)
+{
+    int tcaps;
+
+    if (t == 'p' || t == 'P')
+    {
+        tcaps = c * 10;
+        //printf("%d\n", tcaps);
+    }
+    else if (t == 'g' || t == 'G')
+    {
+        tcaps = c * 16;
+        //printf("%d\n", tcaps);
+    }
+
+    return tcaps;
+}
+
+int ler(int n)
+{
+    if (n == 0)
+    {
+        return 0;
+    }
+
+    int c; // QUANTIDADE das caixas
+    char t; // TAMANHO das caixas P ou p (pequenas) e G ou g (grandes)
+    scanf("%d %c", &c, &t);
+
+    int tcaps = calcular(c, t);
+    return tcaps + ler(n - 1); // Dessa forma somamos o total de capsulas, no fim de toda a interação
+}
+
+int main()
+{
+    int n; // quantidade de professores
+    scanf("%d", &n);
+
+    int total_tcaps = ler(n); // total de capsulas de café
+    int total_xic = ((2 * total_tcaps) / n); // total de xicaras que cada professor pode beber
+
+    printf("%d\n", total_tcaps);
+    printf("%d\n", total_xic);
+
+    return 0;
+}
+
