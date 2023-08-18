@@ -1,0 +1,101 @@
+Descrição:
+
+Dunga e Nando desenvolveram um novo jogo, mas depois de algumas partidas eles notaram certa dificuldade em descobrir quem venceu e quantos pontos um ficou a frente do outro durante o jogo, conhecendo suas habilidades como programador eles pediram que você fizesse um código que os ajudasse a resolver seu problema.
+
+O jogo consiste em escolher um número ao acaso, então cada algarismo desse número é verificado, os algarismos pares somam pontos para o Dunga igual seu número, por exemplo: 2 soma 2 pontos, 4 soma 4 pontos e assim por diante. Da mesma forma, os algarismos ímpares somam pontos para o Nando igual seu número.
+
+Exemplo:
+
+número escolhido: 3845
+
+Dunga recebe 8 + 4 = 12 pontos.
+
+Nando recebe 3 + 5 = 8 pontos.
+
+Portanto, Dunga venceu esse exemplo e teve 4 (12 - 8) pontos de vantagem em comparação ao Nando. 
+
+Formato de entrada:
+
+A entrada consiste em um único número inteiro, que corresponde ao número escolhido ao acaso para o jogo.
+
+Exemplo: 3845
+
+Formato de saída:
+
+Caso haja empate entre os jogadores, a saída deverá ser uma unica linha contendo a palavra: Empate
+
+Caso um dos jogadores vença a partida, a saída serão duas linhas da seguinte forma:
+
+Vencedor: Dunga
+
+4 Pontos de Vantagem
+
+Segue abaixo o código para a resolução desse problema:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int par (int numero)
+{
+    if (numero % 2 == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void ler(int numero, int dunga, int nando)
+{
+    if (numero == 0)
+    {
+        if ( dunga == nando || nando == dunga)
+        {
+             printf("Empate\n");
+        }
+        else if (dunga > nando)
+        {
+            printf("Vencedor: Dunga\n");
+            printf("%d Pontos de Vantagem\n", abs(dunga-nando)); // abs calcula o valor absoluto
+        }
+        else
+        {
+            printf("Vencedor: Nando\n");
+            printf("%d Pontos de Vantagem\n", abs(nando-dunga));
+        }
+        return;
+    }
+
+ // dessa forma eu consigo pegar o ultimo numero de cada numero
+    int unidade = numero % 10;
+
+// aqui eu consigo pegar o numero cortado, por exemplo: se for 3845, vou pegar primeiro o 384;
+// porque o 5 ja foi pegado na parte de "unidade", ai vou passar no fim dessa função o "restante";
+// como parametro e a variavel "numero" declarada no parametro dessa função "ler", vai ter o valor de;
+// "restante"
+    int restante = numero / 10; 
+
+    int ehpar = par(numero);
+
+    if (ehpar == 1)
+    {
+        dunga = dunga + unidade;
+    }
+    else
+    {
+        nando = nando + unidade;
+    }
+
+    return ler(restante, dunga, nando);
+}
+
+int main ()
+{
+    int numero;
+    scanf("%d", &numero);
+    ler(numero,0,0);
+
+    return 0;
+}
