@@ -1,0 +1,34 @@
+Escreva um programa que receba como entrada uma sentença na linguagem da lógica
+proposicional e realize o reconhecimento dela, como pertencendo ou não, à linguagem dessa
+lógica.
+
+Aqui esta o código para a resolução da questão:
+
+print("O programa será executado no terminal do computador,")
+print("portanto, para um melhor uso do programa considere que os simbolos: ¬, ∧, ∨, →, ↔,")
+print("correspondem respectivamente a: Não, E, Ou, Se....Então (implica), SSE (se somente se).")
+ 
+# Sentença fornecida pelo usuário
+frase = input("Digite uma sentença: ")
+
+# Uma lista com as palavras para procurar
+palavras_alvo = ["nao", "NÃO", "não", "Não", "NAO", "Nao", "e", "E", "ou", "Ou" ,"OU", "SE", "Se","ENTÃO","ENTAO","Então", "Entao", "então", "entao", "se","SSE","Sse", "sse"]
+
+# Divide a frase em palavras usando o método split()
+palavras_na_frase = frase.split()
+
+# Procura as palavras_alvo na lista de palavras_na_frase e adiciona na lista ("vazia") de palavras_encontradas
+palavras_encontradas = []
+
+for palavra in palavras_alvo:
+    if palavra in palavras_na_frase:
+        palavras_encontradas.append(palavra)
+
+# Imprime os conectivos encontradas
+if palavras_encontradas:
+    print("SIM, a sentença pertence a linguagem de lógica proposicional.")
+    print("Esses foram os conectivos encontrados:")
+    for palavra in palavras_encontradas:
+        print(palavra)
+else:
+    print("NÃO, a sentença não pertence a linguagem de lógica proposicional.")
