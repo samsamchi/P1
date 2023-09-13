@@ -1,0 +1,73 @@
+#include <stdio.h>
+
+void total_pontos(int dificuldade, int total[], int jogador[], int bonus[], int tam, int i, int contador, int *maior, int *menor)
+{
+    if (i >= tam)
+    {
+        printf("Jogadores que passaram: %d\n", contador);
+        printf("Maior valor: %d\n", *maior);
+        printf("Menor valor: %d\n", *menor);
+        return;
+    }
+    else
+    {
+        total[i] = jogador[i] + bonus[i];
+
+        if (total[i] >= dificuldade)
+        {
+            contador++;
+        }
+
+        if (total[i] < *menor)
+        {
+            *menor = total[i];
+        }
+
+        if (total[i] > *maior)
+        {
+            *maior = total[i];
+        }
+
+        total_pontos(dificuldade, total, jogador, bonus, tam, i + 1, contador, maior, menor);
+    }
+}
+
+void bonus_jogador(int bonus[], int tam, int i)
+{
+    if (i >= tam)
+    {
+        return;
+    }
+    scanf("%d", &bonus[i]);
+    bonus_jogador(bonus, tam, i + 1);
+}
+
+void pontos_jogador(int jogador[], int tam, int i)
+{
+    if (i >= tam)
+    {
+        return;
+    }
+    scanf("%d", &jogador[i]);
+    pontos_jogador(jogador, tam, i + 1);
+}
+
+int main()
+{
+    int dificuldade;
+    scanf("%d", &dificuldade);
+
+    int tamanho = 5;
+    int jogador[tamanho];
+    int bonus[tamanho];
+    int total[tamanho];
+
+    int maior = -2147483647; // valor m�nimo poss�vel
+    int menor = 2147483647;  // valor m�ximo poss�vel
+
+    pontos_jogador(jogador, tamanho, 0);
+    bonus_jogador(bonus, tamanho, 0);
+    total_pontos(dificuldade, total, jogador, bonus, tamanho, 0, 0, &maior, &menor);
+
+    return 0;
+}
