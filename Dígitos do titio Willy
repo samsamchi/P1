@@ -1,0 +1,85 @@
+Descrição:
+
+Willy estava brincando com seus sobrinhos quando propôs a seguinte brincadeira. 
+Dado um número n de no máximo 9 dígitos, ele deve calcular uma função. 
+Mas ele não disse exatamente ao sobrinho como a função funciona. 
+Ao invés disso, ele lhe mostrou um exemplo e deu as dicas abaixo. 
+Veja se você consegue ajudar o sobrinho do titio Willy e resolver a função.
+
+Exemplo: 
+
+f(6718) = 6 * 2 * 4 + 7 * 3 * 3 + 1 * 3 * 2 + 8 * 2 * 1 =  133
+
+Observe que para cada dígito da entrada, se ele for par, deve ser multiplicado por 2. Se for ímpar, por 3. 
+
+Além disso, deve-se também multiplicá-lo pela posição do dígito, onde o dígito da unidade corresponde ao valor 1, a dezena ao valor 2, centena 3, 
+e assim por diante.
+
+Formato de entrada:
+
+Cada caso de teste consiste de um número inteiro.
+
+A entrada termina quando o número dado for igual a 0.
+
+Formato de saída:
+
+Para cada caso de teste, imprima em uma única linha o valor da função.
+
+Aqui está o código para a resolução do problema:
+
+
+#include <stdio.h>
+
+void ler(int numero, int proximodigito, int ultimodigito, int contador, int novonumero)
+{
+    if (numero == 0)
+    {
+        //printf("O numero tem %d digitos\n", contador);
+        printf("%d\n", novonumero);
+
+        return;
+    }
+
+    proximodigito = (numero / 10);
+
+    ultimodigito = (numero % 10);
+
+    numero = proximodigito;
+
+    contador++;
+
+    //printf("ultimo digito do numero: %d\n", ultimodigito);
+
+    //ultimo digito é par
+
+    if (ultimodigito % 2 == 0)
+    {
+        novonumero = novonumero + (ultimodigito * 2 * contador);
+    }
+
+    //ultimo digito é impar
+
+    else
+    {
+        novonumero = novonumero + (ultimodigito * 3 * contador);
+    }
+
+    ler(numero, proximodigito, ultimodigito, contador, novonumero);
+}
+
+int main()
+{
+    int numero;
+
+    scanf("%d", &numero);
+
+    //interrompe quando numero for igual a 0
+    
+    while (numero != 0)
+    {
+        ler(numero, 0, 0, 0, 0);
+        scanf("%d", &numero);
+    }
+
+    return 0;
+}
