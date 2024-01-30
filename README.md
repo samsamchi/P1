@@ -1,1 +1,1 @@
-# Disciplina de Programação 1
+# Programação 1
