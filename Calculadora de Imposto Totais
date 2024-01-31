@@ -1,0 +1,81 @@
+#include <stdio.h>
+
+void ler (int leitura, double cotacaofinal, double produtosreais, double fretereais, double total, double importacao, double icms, double impostos, double totalpagar, double produtodolar)
+{
+    if (leitura == 0)
+    {
+        if (produtodolar < 2500) // com frete
+        {
+            printf("%.2lf\n", cotacaofinal);
+            printf("%.2lf\n", produtosreais);
+            printf("%.2lf\n", fretereais);
+            printf("%.2lf\n", total);
+            printf("%.2lf\n", importacao);
+            printf("%.2lf\n", icms);
+            printf("%.2lf\n", impostos);
+            printf("%.2lf\n", totalpagar);
+            printf("Impostos calculados com o frete\n");
+        }
+
+        else if (produtodolar >= 2500) // sem frete
+        {
+            printf("%.2lf\n", cotacaofinal);
+            printf("%.2lf\n", produtosreais);
+            printf("%.2lf\n", fretereais);
+            printf("%.2lf\n", total);
+            printf("%.2lf\n", importacao);
+            printf("%.2lf\n", icms);
+            printf("%.2lf\n", impostos);
+            printf("%.2lf\n", totalpagar);
+            printf("Impostos calculados sem o frete\n");
+        }
+        
+        return;
+    }
+
+    double cotacao, aliquota, produto, frete;
+    scanf("%lf %lf %lf %lf", &cotacao, &aliquota, &produto, &frete);
+
+    // calculos com frete (valor do produto menor que 2500 dolares)
+    if (produto < 2500)
+    {
+        cotacaofinal = (cotacaofinal + cotacao); // cotacao em dolar
+        produtosreais = (produto * cotacaofinal); // valor do produto em reais
+        fretereais = (frete * cotacaofinal); // valor do frete em reais
+        total = (produtosreais + fretereais); // valor total do produto com frete em reais
+        importacao = (total * 0.6); // valor de importa��o (60 porcento) do produto em reais
+        double valorparcialcima = (produtosreais + fretereais + importacao);
+        double valorparcialbaixo = (1 - (aliquota/100));
+        double valorparcialtotal= (valorparcialcima / valorparcialbaixo);
+        icms = (valorparcialtotal - valorparcialcima); // valor final do produto = ICMS
+        impostos = (importacao + icms); // total de impostos
+        totalpagar = (total + impostos); // total a pagar
+        produtodolar = produto;
+    }
+    // calculo sem o frete (valor do produto maior que 2500 dolares)
+    else if (produto >= 2500)
+    {
+        cotacaofinal = (cotacaofinal + cotacao); // cotacao em dolar
+        produtosreais = (produto * cotacaofinal); // valor do produto em reais
+        fretereais = (frete * cotacaofinal); // valor do frete em reais
+        total = (produtosreais + fretereais); // valor total do produto com frete em reais
+        importacao = (produtosreais * 0.6); // valor de importa��o (SEM frete e 60 porcento) do produto em reais
+        double valorparcialcima = (produtosreais + importacao);
+        double valorparcialbaixo = (1 - (aliquota/100));
+        double valorparcialtotal= (valorparcialcima / valorparcialbaixo);
+        icms = (valorparcialtotal - valorparcialcima); // valor final do produto = ICMS
+        impostos = (importacao + icms); // total de impostos
+        totalpagar = (total + impostos); // total a pagar
+        produtodolar = produto;
+    }
+    return ler(leitura - 1, cotacaofinal, produtosreais, fretereais, total, importacao, icms, impostos, totalpagar, produtodolar);
+}
+    
+
+int main()
+{
+    int leitura = 1; // leitura
+    ler(leitura,0,0,0,0,0,0,0,0,0);
+
+    return 0;
+}
