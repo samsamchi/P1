@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void inverter() 
+{
+    char caractere;
+    if (scanf("%c", &caractere) != EOF && caractere != '\n') 
+    {
+        inverter();
+        printf("%c", caractere);
+    }
+}
+
+int main() 
+{
+    inverter();
+    printf("\n");
+    
+    return 0;
+}
