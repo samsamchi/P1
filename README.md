@@ -1,13 +1,13 @@
 # Programação 1
 
-   - Assuntos abordados na disciplina:
+Assuntos abordados na disciplina:
    
-   • Condicionais;
+• Condicionais;
    
-   • Recursão;
+• Recursão;
    
-   • Laços;
+• Laços;
    
-   • Vetores (arrays);
+• Vetores (arrays);
    
-   • Vetores Bidimensionais (matrizes).
+• Vetores Bidimensionais (matrizes).
